@@ -6,6 +6,8 @@
 
 enum custom_keycodes {
   RGB_SLD = ML_SAFE_RANGE,
+  // Apple Globe key
+  AP_GLOB,
   ST_MACRO_0,
 };
 
@@ -16,7 +18,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TAB,         KC_Q,           KC_W,           KC_E,           KC_R,           KC_T,           KC_LBRC,                                        KC_RBRC,        KC_Y,           KC_U,           KC_I,           KC_O,           KC_P,           KC_BSLS,        
     CW_TOGG,        MT(MOD_LCTL, KC_A),MT(MOD_LALT, KC_S),MT(MOD_LGUI, KC_D),MT(MOD_LSFT, KC_F),KC_G,           KC_MINUS,                                                                       KC_EQUAL,       KC_H,           MT(MOD_LSFT, KC_J),MT(MOD_LGUI, KC_K),MT(MOD_LALT, KC_L),MT(MOD_LCTL, KC_SCLN),KC_QUOTE,       
     SC_LSPO,        KC_Z,           KC_X,           KC_C,           KC_V,           KC_B,                                           KC_N,           KC_M,           KC_COMMA,       KC_DOT,         KC_SLASH,       SC_RSPC,        
-    KC_MEH,         KC_HYPR,        KC_LEFT,        KC_RIGHT,       LT(3,KC_ESCAPE),LGUI(LSFT(KC_5)),                                                                                                KC_CAPS,        LT(6,KC_DELETE),KC_DOWN,        KC_UP,          KC_HYPR,        KC_MEH,         
+    KC_MEH,         KC_HYPR,        KC_LEFT,        KC_RIGHT,       LT(3,KC_ESCAPE),LGUI(LSFT(KC_5)),                                                                                                AP_GLOB,        LT(6,KC_DELETE),KC_DOWN,        KC_UP,          KC_HYPR,        KC_MEH,         
     LT(1,KC_SPACE), LT(2,KC_TAB),   LGUI(KC_SPACE),                 LGUI(LSFT(KC_SPACE)),LT(5,KC_ENTER), LT(4,KC_BSPC)
   ),
   [1] = LAYOUT_moonlander(
@@ -147,6 +149,10 @@ bool rgb_matrix_indicators_user(void) {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
+    case AP_GLOB:
+      host_consumer_send(record->event.pressed ? AC_NEXT_LAYOUT_SELECT : 0);
+      return false;
+    
     case ST_MACRO_0:
     if (record->event.pressed) {
       SEND_STRING(SS_TAP(X_EQUAL) SS_DELAY(100) SS_LSFT(SS_TAP(X_DOT)));
