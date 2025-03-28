@@ -1,7 +1,5 @@
-/*
-  Set any config.h overrides for your specific keymap here.
-  See config.h options at https://docs.qmk.fm/#/config_options?id=the-configh-file
-*/
+#define CHORDAL_HOLD
+#define PERMISSIVE_HOLD
 
 #define QUICK_TAP_TERM 0
 
@@ -15,7 +13,7 @@
 #undef MOUSEKEY_WHEEL_TIME_TO_MAX
 #define MOUSEKEY_WHEEL_TIME_TO_MAX 30
 
-#define SERIAL_NUMBER "4JlZ4/jqPYa"
+#define SERIAL_NUMBER "4JlZ4/Kr0lV7"
 #define LAYER_STATE_8BIT
 
 #define RGB_MATRIX_STARTUP_SPD 60
